@@ -1,12 +1,12 @@
 #include "Character.h"
 
 #include <iostream>
-#include <experimental/filesystem>
+#include <boost/filesystem.hpp>
 #include <algorithm>
 #include <cmath>
 #include <sstream>
 
-#include "SDL_image.h"
+#include <SDL2/SDL_image.h>
 
 #include "Game.h"
 
@@ -34,14 +34,14 @@ void Character::LoadTextures(std::string const textureRootPath) {
 
   SDL_Surface *surface;
   for (auto const& textureDirectoryPath : textureDirectoryPathMap) {
-    if (!std::experimental::filesystem::is_directory(textureDirectoryPath.second) ||
-        std::experimental::filesystem::is_empty(textureDirectoryPath.second)) {
+    if (!boost::filesystem::is_directory(textureDirectoryPath.second) ||
+        boost::filesystem::is_empty(textureDirectoryPath.second)) {
       std::cerr << "Invalid or empty directory: \"" << textureDirectoryPath.second << "\"" << std::endl;
       return;
     }
 
     std::vector<std::string> texturePaths;
-    for (auto const& filePath : std::experimental::filesystem::directory_iterator(textureDirectoryPath.second))
+    for (auto const& filePath : boost::filesystem::directory_iterator(textureDirectoryPath.second))
       texturePaths.push_back(filePath.path().string());
     std::sort(texturePaths.begin(), texturePaths.end());
 

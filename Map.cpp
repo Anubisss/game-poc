@@ -3,7 +3,7 @@
 #include <iostream>
 #include <cmath>
 
-#include "SDL_image.h"
+#include <SDL2/SDL_image.h>
 
 Map::Map(SDL_Renderer *renderer, int width, int height) : renderer(renderer), sizeWidth(width), sizeHeight(height) {
   LoadBackground();

@@ -4,8 +4,8 @@
 #include <vector>
 #include <string>
 
-#include "SDL.h"
-#include "SDL_ttf.h"
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
 
 #include "GameObject.h"
 
@@ -24,7 +24,7 @@ class Character : public GameObject {
     RUN,
   };
 
-  typedef std::map<TextureTypes, std::vector<SDL_Texture*>> TextureContainer;
+  typedef std::map<TextureTypes, std::vector<SDL_Texture*> > TextureContainer;
 
   struct Size {
     int Width;

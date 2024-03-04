@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-#include "SDL_image.h"
+#include <SDL2/SDL_image.h>
 
 #include "Character.h"
 
@@ -13,14 +13,15 @@ void Game::Init() {
   TTF_Init();
 
   SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "best");
-  
-  // SDL_Window *window = SDL_CreateWindow("Game title", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1280, 720, SDL_WINDOW_SHOWN);
-  SDL_Window *window = SDL_CreateWindow("Game title", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 0, 0, SDL_WINDOW_FULLSCREEN);
+
+  SDL_Window *window = SDL_CreateWindow("Game title", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1920, 1080, SDL_WINDOW_SHOWN);
+  //SDL_Window *window = SDL_CreateWindow("Game title", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 0, 0, SDL_WINDOW_FULLSCREEN);
   renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-  
+
   // SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 
   SDL_GetRendererOutputSize(renderer, &windowSizeWidth, &windowSizeHeight);
+  std::cout << windowSizeWidth << " " << windowSizeHeight << std::endl;
 
   font = TTF_OpenFont(FPS_TEXT_FONT_PATH.c_str(), FPS_TEXT_FONT_SIZE);
   if (!font) {
@@ -41,7 +42,7 @@ void Game::RunMainLoop() {
   Uint32 updateStart, updateInterval;
   Uint32 previousUpdateStart = SDL_GetTicks();
   Uint32 updateDiff = 0;
-  
+
   while (isRunning) {
     updateStart = SDL_GetTicks();
     updateDiff = updateStart - previousUpdateStart;
@@ -120,7 +121,7 @@ void Game::CalculateFps() {
 
       SDL_FreeSurface(surface);
     }
-  
+
     fps = 0;
     fpsLastCollectTime = ticks;
   }
